@@ -9,9 +9,10 @@ class FlutterCalcMidTerm extends StatelessWidget {
     );
   }
 }
-class CalcState extends StatefulWidget{
+class CalcState extends StatefulWidget {
   CalcStateState createState() => CalcStateState();
 }
+
 class CalcStateState extends State<CalcState> {
   dynamic text ='0';
   double firstNumber = 0;
@@ -40,6 +41,7 @@ class CalcStateState extends State<CalcState> {
     )
     );
   }
+
   Widget zeroBtn(btnText, Color color) {
     return Container(
       padding: EdgeInsets.only(bottom: 0),
@@ -58,6 +60,7 @@ class CalcStateState extends State<CalcState> {
     )
     );
   } 
+
   Widget build(BuildContext buildCx) {
     return new Scaffold(
       appBar: null,
@@ -125,15 +128,6 @@ class CalcStateState extends State<CalcState> {
       ),
     );
   }
-  String isContainDecimal(dynamic result) {
-
-    if(result.toString().contains('.')) {
-      List<String> eraseDot = result.toString().split('.');
-      if(!(int.parse(eraseDot[1]) > 0))
-        return result = eraseDot[0].toString();
-    }
-    return result;
-  }
   void estimate(btnText) {
     if(btnText  == 'C') {
       text ='0';
@@ -143,7 +137,9 @@ class CalcStateState extends State<CalcState> {
       resultFinal = '';
       operand = '';
       preOperand = '';
+
     } else if( operand == '=' && btnText == '=') {
+
       if(preOperand == '+') {
          resultFinal = addition();
       } else if( preOperand == '-') {
@@ -153,6 +149,7 @@ class CalcStateState extends State<CalcState> {
       } else if( preOperand == '/') {
           resultFinal = division();
       }
+
     } else if(btnText == '+' || btnText == '-' || btnText == 'x' || btnText == '/' || btnText == '=') {
 
       if(firstNumber == 0) {
@@ -172,7 +169,7 @@ class CalcStateState extends State<CalcState> {
       preOperand = operand;
       operand = btnText;
       result = '';
-      }
+    }
     else if(btnText == '%') {
      result = firstNumber / 100;
      resultFinal = isContainDecimal(result);
@@ -181,9 +178,9 @@ class CalcStateState extends State<CalcState> {
         result = result.toString()+'.';
       }
       resultFinal = result;
-      }
+    }
     else if(btnText == '+/-') {
-        result.toString().startsWith('-') ? result = result.toString().substring(1): result = '-' + result.toString();
+        result.toString().startsWith('-') ? result = result.toString().substring(1): result = '-'+result.toString();
         resultFinal = result;
     }
     else {
@@ -214,6 +211,17 @@ class CalcStateState extends State<CalcState> {
           result = (firstNumber / secondNumber).toString();
            firstNumber = double.parse(result);
           return isContainDecimal(result);
+  }
+
+
+  String isContainDecimal(dynamic result) {
+
+    if(result.toString().contains('.')) {
+        List<String> splitDecimal = result.toString().split('.');
+        if(!(int.parse(splitDecimal[1]) > 0))
+         return result = splitDecimal[0].toString();
+    }
+    return result;
   }
 
 }
