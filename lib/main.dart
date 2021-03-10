@@ -216,7 +216,4 @@ class CalcStateState extends State<CalcState> {
           return isContainDecimal(result);
   }
 
-
-
-
 }
